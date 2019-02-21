@@ -27,22 +27,23 @@ class WallStop():
             rate.sleep()
 
 if __name__ == '__main__':
-    print("main")
+    rospy.loginfo("### main")
 
     rospy.init_node('wall_stop')
-    print("wall_stop")
+    rospy.loginfo("### wall_stop")
 
 
     rospy.wait_for_service('/motor_on')
 
-    print("/motor_on")
+    rospy.loginfo("### /motor_on")
 
     rospy.wait_for_service('/motor_off')
 
-    print("/motor_off")
+    rospy.loginfo("### /motor_off")
 
     rospy.on_shutdown(rospy.ServiceProxy('/motor_off', Trigger).call)
     rospy.ServiceProxy('/motor_on', Trigger).call()
-    print("ServiceProxy")
+
+    rospy.loginfo("### ServiceProxy")
     
     WallStop().run()
