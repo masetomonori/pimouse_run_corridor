@@ -18,17 +18,33 @@ class WallStopTest(unittest.TestCase):
         return left, right
 
     def test_io(self):
-        left, right = self.set_and_get(51, 0, 0, 0) # wall fornt 
+        left, right = self.set_and_get(51, 0, 0, 0)  # wall fornt
+        rospy.loginfo(str(left) + " " + str(right)) 
         self.assertTrue(left > right, "don't curve to right") #
 
-        left, right = self.set_and_get(0, 0, 0, 60) # wall front
+        left, right = self.set_and_get(0, 0, 0, 60)  # wall front
+        rospy.loginfo(str(left) + " " + str(right))
         self.assertTrue(left > right, "don't curve to right") #
 
-        left, right = self.set_and_get(0, 0, 50, 0) #curve to left
+        left, right = self.set_and_get(0, 0, 60, 0)  # near to right
+        rospy.loginfo(str(left) + " " + str(right))
         self.assertTrue(left < right , "don't curve to left")
 
-        left, right = self.set_and_get(0, 60, 0, 0) #curve to right
-        self.assertTrue(left == right != 0 , "don't go straight")
+        left, right = self.set_and_get(0, 60, 0, 0)  # near to left
+        rospy.loginfo(str(left) + " " + str(right))
+        self.assertTrue(left > right , "don't curve to right")
+
+        left, right = self.set_and_get(0, 0, 0, 0)   # no wall
+        rospy.loginfo(str(left) + " " + str(right))
+        self.assertTrue(left < right , "don't curve to left")
+
+
+
+        #left, right = self.set_and_get(0, 0, 49, 0)  #curve to left
+        #self.assertTrue(left < right , "don't curve to left")
+
+        #left, right = self.set_and_get(0, 49, 0, 0)  # near to left
+        #self.assertTrue(left > right, "don't curve to right")
 
 
 if __name__ == '__main__':

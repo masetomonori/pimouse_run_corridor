@@ -41,6 +41,7 @@ class WallStop():
             else:
                 e = 50 - self.sensor_values.left_side
                 data.angular.z = e * math.pi / 180.0
+                #data.angular.z = 0
 
             self.cmd_vel.publish(data)
             rate.sleep()
